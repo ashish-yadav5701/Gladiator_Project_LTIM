@@ -1,0 +1,45 @@
+<nav class="navbar">
+  <div class="logo">
+    <img src="assets/logo.png" alt="Logo">
+    <div>
+      <div class="appName" [routerLink]="['/home']">Event Ease</div>
+      <div class="slogan">Where moments become memories</div>
+    </div>
+    <div class="detail" *ngIf="IsLoggin">
+      <div class="welcome">Welcome {{userName}}</div>
+      <div class="role">Role : {{roleName}}</div>
+    </div>
+  </div>
+
+
+
+  <div class="navbar-options" style="color: white;">
+
+    <a *ngIf="IsLoggin" [routerLink]="['/dashboard']">Home</a>
+    <a *ngIf="roleName === 'PLANNER'" [routerLink]="['/create-event']">Create Event</a>
+    <a *ngIf="roleName === 'PLANNER'" [routerLink]="['/add-resource']">Add Resource</a>
+    <a *ngIf="roleName === 'PLANNER'" [routerLink]="['/resource-allocate']">Allocate Resource</a>
+    <a *ngIf="roleName === 'CLIENT'" [routerLink]="['/booking-details']">View Bookings</a>
+    <a *ngIf="roleName === 'STAFF'" [routerLink]="['/view-events']">View Events</a>
+  </div>
+
+  <div class="logout">
+    <div *ngIf="IsLoggin"><a (click)="logout()" [routerLink]="['/home']">Logout</a></div>
+  </div>
+  <div class="newUser" *ngIf="!IsLoggin">
+    <div>
+      <a class="loginBtn" [routerLink]="['/login']">Login</a>
+      <a class="signUpBtn" [routerLink]="['/registration']">Register</a>
+    </div>
+  </div>
+</nav>
+
+
+<body>
+  <div>
+
+    <router-outlet>
+    </router-outlet>
+  </div>
+
+</body>

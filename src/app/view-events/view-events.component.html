@@ -1,0 +1,127 @@
+<div class="wrapper" [ngClass]="{'blur-background': isUpdateVisible}">
+    <div *ngIf="isUpdate" class="update-section">
+        <div class="d-flex justify-content-between mt-4">
+            <h2 class="mb-0">Manage Events</h2>
+        </div>
+        <div class="card mt-3">
+            <div class="card-header">
+                <label for="content" class="form-label" style="color: white;">Event ID</label>
+            </div>
+            <div class="row mt-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="mb-3" style="vertical-align: middle;">
+                                <input type="text" id="content" name="content" placeholder="Please enter Sr#"
+                                    [(ngModel)]="inputMessage" class="custom-input">
+                                <button class="btn btn-outline-dark mt-1" (click)="searchEvent()">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Sr#</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Date Time</th>
+                                <th>Location</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of eventObj$ | async">
+                                <td>{{item.eventID}}</td>
+                                <td>{{item.title|titlecase}}</td>
+                                <td>{{item.description|titlecase}}</td>
+                                <td>{{item.dateTime | date:'medium'}}</td>
+                                <td>{{item.location|titlecase}}</td>
+                                <td>{{item.status|titlecase}}</td>
+                                <td>
+                                    <button (click)="edit(item)" *ngIf="item.eventID" class="btn btn-outline-warning"
+                                        [disabled]="item.status==='Complete'">Update</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="update-form" [hidden]="isUpdate">
+        <div class="banner">
+            <h2>Update Event</h2>
+        </div>
+        <div class="form">
+            <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title :</label>
+                    <input type="text" id="title" formControlName="title" class="form-control">
+                    <div class="text-danger"
+                        *ngIf="itemForm.get('title')?.hasError('required') && itemForm.get('title')?.touched">
+                        Title is required
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description :</label>
+                    <input type="text" id="description" formControlName="description" class="form-control">
+                    <div class="text-danger"
+                        *ngIf="itemForm.get('description')?.hasError('required') && itemForm.get('description')?.touched">
+                        Description is required
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="dateTime" class="form-label">Date:</label>
+                    <input type="datetime-local" id="dateTime" formControlName="dateTime" class="form-control">
+                    <div class="text-danger"
+                        *ngIf="itemForm.get('dateTime')?.hasError('required') && itemForm.get('dateTime')?.touched">
+                        Date Time is required
+                    </div>
+                    <div class="text-danger"
+                        *ngIf="itemForm.get('dateTime')?.hasError('invalidDate') && itemForm.get('dateTime')?.touched">
+                        Date should be in the future
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location:</label>
+                    <input type="text" id="location" formControlName="location" class="form-control">
+                    <div class="text-danger"
+                        *ngIf="itemForm.get('location')?.hasError('required') && itemForm.get('location')?.touched">
+                        Location is required
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="status" class="form-label">Status:</label>
+                    <select id="status" formControlName="status" class="form-control">
+                        <option value="" hidden>Choose Status</option>
+                        <option value="Initiated">Initiated</option>
+                        <option value="Complete">Complete</option>
+                    </select>
+                    <div class="text-danger"
+                        *ngIf="itemForm.get('status')?.hasError('required') && itemForm.get('status')?.touched">
+                        Status is required
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <ng-container *ngIf="isUpdate">
+        <div *ngIf="responseMsg$ | async as success" class="alert alert-success">
+            {{ success }}
+        </div>
+        <div *ngIf="errorMsg$ | async as error" class="alert alert-danger">
+            {{ error }}
+        </div>
+    </ng-container>
+</div>

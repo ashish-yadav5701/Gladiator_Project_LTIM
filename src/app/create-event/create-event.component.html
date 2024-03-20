@@ -1,0 +1,95 @@
+<div class="banner">
+    <h2>Event Management</h2>
+</div>
+<div class="conatainer2">
+    <div class="form">
+        <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+            <div>
+                <h5>Create an event</h5>
+                <hr>
+                <div class="mb-3">
+                    <label for="name" class="form-label ">Title :</label>
+                    <input type="text" id="title" formControlName="title" class="form-control"
+                        placeholder="enter title">
+                    <div *ngIf="itemForm.get('title')?.hasError('required') && itemForm.get('title')?.touched"
+                        class="text-danger">Title is required</div>
+                </div>
+                <div class="mb-3">
+                    <label for="type" class="form-label ">Description :</label>
+                    <input type="text" id="description" formControlName="description" class="form-control"
+                        placeholder="enter description">
+                    <div class="text-danger"
+                        *ngIf="itemForm.get('description')?.hasError('required') && itemForm.get('description')?.touched">
+                        Description is Required
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="dateTime" class="form-label ">Date:</label>
+                    <input type="datetime-local" id="dateTime" formControlName="dateTime" class="form-control"
+                        placeholder="select date">
+                    <div class="text-danger"
+                        *ngIf="itemForm.get('dateTime')?.hasError('required') && itemForm.get('dateTime')?.touched">
+                        Date Time is Required
+                    </div>
+
+                    <div class="text-danger"
+                        *ngIf="itemForm.get('dateTime')?.hasError('invalidDate') && itemForm.get('dateTime')?.touched">
+                        Date should be future
+                    </div>
+
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label ">Location:</label>
+                    <!-- create input with formControlName="type"  and with validation  -->
+                    <input type="text" id="location" formControlName="location" class="form-control"
+                        placeholder="enter location">
+                    <div class="text-danger"
+                        *ngIf="itemForm.get('location')?.hasError('required') && itemForm.get('location')?.touched">
+                        Location is Required
+                    </div>
+
+                </div>
+                <div class="mb-3">
+                    <label for="status" class="form-label">Status</label>
+                    <select formControlName="status" class="form-control">
+                        <option value="" hidden>Choose Status</option>
+                        <option value="Initiated">Initiated</option>
+                        <option value="Complete" disabled>Complete</option>
+                    </select>
+
+                    <div class="text-danger"
+                        *ngIf="itemForm.get('status')?.hasError('required') && itemForm.get('status')?.touched">
+                        Status is Required
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="user" class="form-label">Select User</label>
+                    <select formControlName="user" class="form-control">
+                        <option value="" hidden>Choose user</option>
+                        <option [ngValue]="user" *ngFor="let user of userList$ | async">{{user.userID}}
+                            {{user.username}}</option>
+
+                    </select>
+
+                    <div class="text-danger"
+                        *ngIf="itemForm.get('user')?.hasError('required') && itemForm.get('user')?.touched">
+                        User is Required
+                    </div>
+
+                </div>
+                <div class="mb-5">
+                    <br>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+                <ng-container>
+                    <div *ngIf="success$ | async as success" class="alert alert-success">
+                        {{success}}
+                    </div>
+                    <div *ngIf="error$ | async as error" class="alert alert-danger">
+                        {{error}}
+                    </div>
+                </ng-container>
+            </div>
+        </form>
+    </div>
+</div>

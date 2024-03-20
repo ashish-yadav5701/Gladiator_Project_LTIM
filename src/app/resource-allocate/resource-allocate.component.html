@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center mt-4">
+  <h2 class="mb-0">Manage Resource Allocation</h2>
+
+</div>
+<div class="row mt-3 justify-content-center">
+  <div class="card justify-content-center border border-dark shadow-lg">
+    <h4 class="card-header   text-white" style="text-align: center; background-color:#132257;">
+      Add Resource Allocation
+    </h4>
+    <div class="card-body">
+      <form class="mb-3 mt-md-4" [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="mb-3">
+              <label for="event" class="form-label mt-1" style="font-weight: bold;">Event</label>
+              <br>
+              <select formControlName="event">
+                <option value="" hidden>Choose Event</option>
+                <option *ngFor="let event of eventList$|async" [ngValue]="event">{{event.title}}</option>
+              </select>
+              <div *ngIf="itemForm.get('event')?.hasError('required') && itemForm.get('event')?.touched"
+                class="text-danger">Event ID is requried</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="mb-3">
+              <label for="resource" class="form-label" style="font-weight: bold;">Resource</label>
+              <br>
+              <select formControlName="resource">
+                <option value="" hidden>Choose Resource</option>
+
+                <option *ngFor="let resource of filteredResourceList$ | async" [ngValue]="resource">{{resource.name}}
+                </option>
+
+              </select>
+              <div *ngIf="itemForm.get('resource')?.hasError('required') && itemForm.get('resource')?.touched"
+                class="text-danger">Resource ID is required</div>
+              <div *ngIf="itemForm.get('resource')?.hasError('nNegitive') && itemForm.get('resource')?.touched"
+                class="text-danger">Resource ID Should not be negative </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="mb-3">
+              <label for="quantity" class="form-label" style="font-weight: bold;">Quantity</label><br>
+              <input type="number" placeholder="Enter Quantity" id="quantity" formControlName="quantity">
+              <div *ngIf="itemForm.get('quantity')?.hasError('required') && itemForm.get('quantity')?.touched"
+                class="text-danger">Quantity is requried</div>
+              <div *ngIf="itemForm.get('quantity')?.hasError('nNegitive') && itemForm.get('quantity')?.touched"
+                class="text-danger">Quantity Should not be Negative</div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="d-grid">
+              <br>
+              <button type="submit" class="btn btn-outline-dark mt-1" eventId="submit"
+                style="font-weight: bold;">Submit</button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div *ngIf="showMessage" class="alert alert-success mt-4" role="alert">
+        {{ responseMessage }}
+      </div>
+      <div *ngIf="showError" class="alert alert-danger" role="alert">
+        {{errorMessage}}
+      </div>
+
+    </div>
+  </div>
+</div>

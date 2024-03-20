@@ -1,0 +1,182 @@
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.user-table th,
+.user-table td {
+  border: 1px solid #032242;
+  padding: 8px;
+  text-align: center;
+}
+
+.user-table th {
+  background-color: #007bff;
+  font-weight: bold;
+  color: #fff
+}
+
+.event-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.event-table th {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.event-table th,
+.event-table td {
+  border: 1px solid #032242;
+  padding: 8px;
+  text-align: center;
+
+}
+
+.event-table th {
+  background-color: #007bff;
+  // color: #000000;
+  font-weight: bold;
+  color: #fff
+}
+
+a.task-list {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  text-decoration: none;
+  color: #007bff;
+}
+
+a.task-list:hover {
+  text-decoration: underline;
+}
+
+
+
+.card-header {
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+
+.card-body {
+  margin-top: 10px;
+
+}
+
+
+.btn.active {
+  background-color: #007bff;
+  border: none;
+  border-radius: 3px 3px 0px 0px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+}
+
+.container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.profile-info {
+  margin-top: 30px;
+}
+
+.profile-info p {
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.orders-count {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.orders-count p {
+  font-size: 20px;
+  color: #007bff;
+}
+
+.image-container {
+  display: flex;
+  margin: 20px auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 20px;
+
+
+}
+
+h3 {
+  color: #333;
+}
+
+.event {
+  margin: 20px;
+  text-align: center;
+
+}
+
+.event img {
+  margin-bottom: 10px;
+  height: auto;
+  width: 500px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+// css for client dashboard
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.container3 {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+
+}
+
+.content {
+  display: flex;
+}
+
+.left-half2 {
+  flex: 1;
+  padding: 20px;
+
+}
+
+.right-half2 {
+  flex: 1;
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+  padding: 15px;
+}

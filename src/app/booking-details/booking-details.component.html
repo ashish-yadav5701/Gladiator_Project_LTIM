@@ -1,0 +1,69 @@
+<div class="booking">
+    <div class="d-flex justify-content-between mt-4">
+        <h2 class="mb-0">Manage Events</h2>
+
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-10">
+            <div class="mb-3">
+                <label for="content" class="form-label ">Event ID</label>
+                <input type="content" name="eventID" [(ngModel)]="formModel.eventID" class="form-control" id="eventID"
+                    placeholder="Search with Event Id">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <br>
+            <button (click)="searchEvent()" class="btn btn-primary mt-1 w-100">Search</button>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="card">
+            <div class="card-header">Booking Information</div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Sr#</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Date Time</th>
+                            <th>Location</th>
+                            <th>status</th>
+                            <th *ngIf="first">Allocation</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let event of eventObj">
+                            <td>{{event.eventID}}</td>
+                            <td>{{event.title|titlecase}}</td>
+                            <td>{{event.description|titlecase}}</td>
+                            <td>{{event.dateTime | date:'medium'}}</td>
+                            <td>{{event.location|titlecase}}</td>
+                            <td>{{event.status|titlecase}}</td>
+                            <td *ngIf="first">
+                                <span *ngFor="let eventObj of listOfAllocation">Quantity:{{eventObj.quantity}}
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h6>Resource:</h6>
+                                            <p>Name:{{eventObj.resource.name|titlecase}}</p>
+                                            <p>Type:{{eventObj.resource.type|titlecase}}</p>
+                                        </div>
+                                    </div>
+
+                                </span>
+
+                            </td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

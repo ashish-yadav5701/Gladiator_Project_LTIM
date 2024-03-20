@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+</head>
+<body>
+  <div class="container" >
+    <header>
+      <img src="assets/logo.png" alt="Logo" class="logo">
+      <h1 class="app-name">Event Ease</h1>
+      <p class="slogan">Where moments become memories</p>
+    </header>
+    <div class="content">
+      <div class="left-half">
+        <form class="login-form" [formGroup]="itemForm" (ngSubmit)="onLogin()">
+          <h2>Login</h2>
+          <div class="mb-1">
+            <label for="username" class="fw-bold form-label ">Username</label>
+            <input type="text" id="username" formControlName="username" class="form-control">
+            <span *ngIf="this.itemForm.get('username')?.hasError('required') && this.itemForm.get('username')?.touched" class="text-danger">
+              Username is required
+            </span>
+            <span *ngIf="!this.itemForm.get('username')?.hasError('required') && this.itemForm.get('username')?.hasError('NoSpaceValidator')" class="text-danger">
+              Username is invalid
+            </span>
+          </div>
+          <div class="mb-1">
+            <label for="password" class="fw-bold form-label ">Password</label>
+              <!-- //create input with formControlName password -->
+            <input type="password" id="password" formControlName="password" class="form-control">
+            <span *ngIf="this.itemForm.get('password')?.hasError('required') && this.itemForm.get('password')?.touched" class="text-danger">
+              Password is required
+            </span>
+            <span *ngIf="!this.itemForm.get('password')?.hasError('required') && this.itemForm.get('password')?.hasError('invalidPassword')" class="text-danger">
+              Password must contain atleast 1 uppercase character, 1 lowercase character, 1 digit, 1 special character and atleast eight characters
+            </span>
+          </div>
+          <button type="submit">Login</button>
+          <div>
+            <p class="mb-0  text-center"><a (click) = "forgotPassword()"
+                class="text-primary fw-bold">Forgot password?</a></p>
+          </div>
+          <div>
+            <p class="mb-0  text-center">Don't have an account? <a (click)="registration()"
+                class="text-primary fw-bold">Registration</a></p>
+          </div>
+          <ng-container >
+            <div *ngIf="userSuccess$ | async as success" class="alert alert-success">
+                {{success}}
+            </div>
+            <div *ngIf="userError$ | async as error" class="alert alert-danger">
+                {{error}}
+            </div>
+        </ng-container>
+        </form>
+      </div>
+      <div class="right-half">
+        <img src="assets/login.jpg" alt="Image" class="image">
+      </div>
+    </div>
+  </div>
+
+  <!--Forgot Password Page-->
+  
+</body>
+</html>

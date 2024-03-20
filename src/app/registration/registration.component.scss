@@ -1,0 +1,104 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  background-color: #f5f5f5;
+}
+ 
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+ 
+}
+ 
+header {
+  padding: 3px;
+  text-align: center;
+ 
+}
+span{
+ margin-top: 0px;
+ margin-bottom: 2px;
+}
+ 
+.logo {
+  width: 40px;
+  display: inline-block;
+}
+ 
+.app-name {
+  font-size: 24px;
+  font-weight: bold;
+  color: rgb(70, 70, 5);
+  font-family: 'Brush Script MT', cursive;
+  margin-bottom: 1px;
+}
+ 
+.slogan {
+  font-size: 12px;
+  color: #0a0d93;
+}
+ 
+.content {
+  display: flex;
+  
+}
+ 
+.left-half {
+  flex: 1;
+  padding: 20px;
+  align-content: center;
+}
+ 
+.right-half {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+ 
+.register-form {
+  margin:0px  ;
+  width: 80%;
+}
+.register-form select{
+  width: 90%;
+  margin-bottom: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.register-form input {
+  width: 90%;
+  margin-bottom: 2px;
+  padding: 3px;
+  height: fit-content;
+  font-size: medium;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+ 
+.register-form button {
+  width: 90%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+ 
+.register-form button:hover {
+  background-color: #0056b3;
+}
+ 
+.image {
+  width: 400px;
+  height: 400px;
+  object-fit:initial;
+}

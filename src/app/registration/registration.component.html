@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>registration</title>
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <img src="assets/logo.png" alt="Logo" class="logo">
+      <h1 class="app-name">Event Ease</h1>
+      <p class="slogan">Where moments become memories</p>
+    </header>
+    <div class="content">
+      <div class="left-half">
+        <form class="register-form" [formGroup]="itemForm" (ngSubmit)=" onRegister()">
+          <h2>Register User</h2>
+          <div class="mb-3">
+            <label for="username" class="fw-bold form-label">Username</label>
+            <input type="text" name="username" formControlName="username" class="form-control">
+            <div class="text text-danger mt-2" *ngIf="itemForm.get('username')?.hasError('required') &&
+           itemForm.get('username')?.touched ">
+              Username is required
+            </div>
+            <div class="text text-danger mt-2" *ngIf="itemForm.get('username')?.hasError('NoSpaceValidator')">
+              Invalid user name format
+            </div>
+            <div class="text text-danger mt-2" *ngIf="itemForm.get('username')?.hasError('UserExist') &&
+           itemForm.get('username')?.touched ">
+              Username is required
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="fw-bold form-label">Email address</label>
+            <!-- //create input with  formControlName="email" -->
+
+            <input type="text" name="email" formControlName="email" class="form-control">
+            <div class="text text-danger mt-2" *ngIf="itemForm.get('email')?.hasError('required') &&
+           itemForm.get('email')?.touched ">
+              Email is required
+            </div>
+
+            <div class="text text-danger mt-2"
+              *ngIf="!itemForm.get('email')?.hasError('required') && itemForm.get('email')?.hasError('invalidEmail')">
+              Incorrect email format
+            </div>
+
+
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="fw-bold form-label ">Password</label>
+            <!-- //create input with  formControlName="password" -->
+
+            <input type="password" name="password" formControlName="password" class="form-control">
+
+            <div class="text text-danger mt-2" *ngIf="itemForm.get('password')?.hasError('required') &&
+           itemForm.get('password')?.touched ">
+              Password is required
+            </div>
+
+            <div class="text text-danger mt-2"
+              *ngIf="!itemForm.get('password')?.hasError('required') && itemForm.get('password')?.hasError('invalidPassword')">
+              Incorrect password format
+            </div>
+
+          </div>
+
+          <div class="mb-3">
+
+            <label for="role">Select User Role</label>
+            <select name="role" formControlName="role">
+
+              <option value="null" hidden>Choose Role</option>
+              <option value="PLANNER">PLANNER</option>
+              <option value="STAFF">STAFF</option>
+              <option value="CLIENT">CLIENT</option>
+
+            </select>
+
+            <div class="text text-danger mt-2" *ngIf="itemForm.get('role')?.hasError('required') &&
+      itemForm.get('role')?.touched ">
+              Please choose role
+            </div>
+
+          </div>
+          <button type="submit">Submit</button>
+          <p class="mb-0  text-center"> <a [routerLink]="['/login']" class="text-primary fw-bold">Go to
+              Login</a></p>
+        </form>
+        <div *ngIf="userSuccess$ | async as responseMessage" class="alert alert-success " role="alert">
+          {{responseMessage}}
+        </div>
+        <div *ngIf="userError$ | async as error" class="alert alert-danger" role="alert">
+          {{error}}
+        </div>
+      </div>
+
+
+      <div class="right-half">
+        <img src="assets/login.jpg" alt="Image" class="image">
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
